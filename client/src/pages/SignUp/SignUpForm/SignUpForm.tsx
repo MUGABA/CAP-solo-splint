@@ -1,10 +1,9 @@
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
+import CustomizedInput from '../../../components/ReUsableComponents/CustomTextField';
+import RequiredButton from '../../../components/ReUsableComponents/RequiredButton';
 import useStyles from './useStyles';
 
 interface Props {
@@ -51,66 +50,49 @@ const SignUpForm = ({ handleSubmit }: Props): JSX.Element => {
     >
       {({ handleSubmit, handleChange, values, touched, errors, isSubmitting }) => (
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
-          <TextField
-            id="username"
-            label={<Typography className={classes.label}>Username</Typography>}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            InputProps={{
-              classes: { input: classes.inputs },
-            }}
-            name="username"
-            autoComplete="username"
-            autoFocus
-            helperText={touched.username ? errors.username : ''}
-            error={touched.username && Boolean(errors.username)}
-            value={values.username}
-            onChange={handleChange}
-          />
-          <TextField
-            id="email"
-            label={<Typography className={classes.label}>E-mail address</Typography>}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            InputProps={{
-              classes: { input: classes.inputs },
-            }}
-            name="email"
-            autoComplete="email"
-            helperText={touched.email ? errors.email : ''}
-            error={touched.email && Boolean(errors.email)}
-            value={values.email}
-            onChange={handleChange}
-          />
-          <TextField
-            id="password"
-            label={<Typography className={classes.label}>Password</Typography>}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            InputProps={{
-              classes: { input: classes.inputs },
-            }}
-            type="password"
-            autoComplete="current-password"
-            helperText={touched.password ? errors.password : ''}
-            error={touched.password && Boolean(errors.password)}
-            value={values.password}
-            onChange={handleChange}
-          />
-
           <Box textAlign="center" marginTop={5}>
-            <Button type="submit" size="large" variant="contained" color="primary" className={classes.submit}>
-              {isSubmitting ? <CircularProgress style={{ color: 'white' }} /> : 'Create'}
-            </Button>
+            <h1>Sign Up</h1>
+          </Box>
+          <CustomizedInput
+            id="email"
+            name="email"
+            placeholder="Email here"
+            value={values.email}
+            handleChange={handleChange}
+            label="Email"
+            classes={classes}
+            type="text"
+            errors={errors}
+            touched={touched}
+          />
+          <CustomizedInput
+            id="username"
+            name="username"
+            placeholder="Name here"
+            value={values.username}
+            handleChange={handleChange}
+            label="Username"
+            classes={classes}
+            type="text"
+            errors={errors}
+            touched={touched}
+          />
+          <CustomizedInput
+            id="password"
+            name="password"
+            placeholder="Password here"
+            value={values.password}
+            handleChange={handleChange}
+            label="Password"
+            classes={classes}
+            type="password"
+            errors={errors}
+            touched={touched}
+          />
+          <Box textAlign="center" marginTop={5}>
+            <RequiredButton type="submit" size="medium" variant="contained" color="primary" className={classes.submit}>
+              {isSubmitting ? <CircularProgress style={{ color: 'white' }} /> : 'SIGH UP'}
+            </RequiredButton>
           </Box>
         </form>
       )}

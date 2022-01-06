@@ -1,14 +1,13 @@
-import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
 import { FormikHelpers } from 'formik';
-import useStyles from './useStyles';
-import register from '../../helpers/APICalls/register';
-import SignUpForm from './SignUpForm/SignUpForm';
-import AuthHeader from '../../components/AuthHeader/AuthHeader';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/useAuthContext';
 import { useSnackBar } from '../../context/useSnackbarContext';
+import register from '../../helpers/APICalls/register';
+import SignUpForm from './SignUpForm/SignUpForm';
+import useStyles from './useStyles';
 
 export default function Register(): JSX.Element {
   const classes = useStyles();
@@ -38,7 +37,7 @@ export default function Register(): JSX.Element {
 
   return (
     <Grid container component="main" className={classes.root}>
-      <Grid item xs={12} sm={8} md={7} elevation={6} component={Paper} square>
+      <Grid item xs={12} elevation={6} component={Paper} square>
         <Box
           display="flex"
           justifyContent="space-between"
@@ -46,18 +45,16 @@ export default function Register(): JSX.Element {
           flexDirection="column"
           className={classes.authWrapper}
         >
-          <AuthHeader linkTo="/login" asideText="Already have an account?" btnText="Login" />
-          <Box width="100%" maxWidth={450} p={3} alignSelf="center">
-            <Grid container>
-              <Grid item xs>
-                <Typography className={classes.welcome} component="h1" variant="h5">
-                  Create an account
-                </Typography>
-              </Grid>
-            </Grid>
+          {/* <AuthHeader linkTo="/login" asideText="Already have an account?" btnText="Login" /> */}
+          <Box width="100%" maxWidth={450} p={3} alignSelf="center" elevation={6} component={Paper} square>
             <SignUpForm handleSubmit={handleSubmit} />
+            <Box p={2} alignSelf="center" style={{ textAlign: 'center' }}>
+              <span>Already a member? </span>
+              <Link to="/login" style={{ display: 'inline', color: '#f14140' }}>
+                login
+              </Link>
+            </Box>
           </Box>
-          <Box p={1} alignSelf="center" />
         </Box>
       </Grid>
     </Grid>

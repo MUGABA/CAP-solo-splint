@@ -1,10 +1,9 @@
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
+import CustomizedInput from '../../../components/ReUsableComponents/CustomTextField';
+import RequiredButton from '../../../components/ReUsableComponents/RequiredButton';
 import useStyles from './useStyles';
 
 interface Props {
@@ -46,50 +45,39 @@ export default function Login({ handleSubmit }: Props): JSX.Element {
     >
       {({ handleSubmit, handleChange, values, touched, errors, isSubmitting }) => (
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
-          <TextField
+          <Box textAlign="center" marginTop={5}>
+            <h1>Login</h1>
+          </Box>
+          <CustomizedInput
             id="email"
-            label={<Typography className={classes.label}>E-mail address</Typography>}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            InputProps={{
-              classes: { input: classes.inputs },
-            }}
             name="email"
-            autoComplete="email"
-            autoFocus
-            helperText={touched.email ? errors.email : ''}
-            error={touched.email && Boolean(errors.email)}
+            placeholder="Email here"
             value={values.email}
-            onChange={handleChange}
+            handleChange={handleChange}
+            label="Email"
+            classes={classes}
+            type="text"
+            errors={errors}
+            touched={touched}
           />
-          <TextField
+          <CustomizedInput
             id="password"
-            label={<Typography className={classes.label}>Password</Typography>}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            InputProps={{
-              classes: { input: classes.inputs },
-              endAdornment: <Typography className={classes.forgot}>Forgot?</Typography>,
-            }}
-            type="password"
-            autoComplete="current-password"
-            helperText={touched.password ? errors.password : ''}
-            error={touched.password && Boolean(errors.password)}
+            name="password"
+            placeholder="Password here"
             value={values.password}
-            onChange={handleChange}
+            handleChange={handleChange}
+            label="Password"
+            classes={classes}
+            type="password"
+            errors={errors}
+            touched={touched}
           />
           <Box textAlign="center" marginTop={5}>
-            <Button type="submit" size="large" variant="contained" color="primary" className={classes.submit}>
+            <RequiredButton type="submit" size="medium" className={classes.submit}>
               {isSubmitting ? <CircularProgress style={{ color: 'white' }} /> : 'Login'}
-            </Button>
+            </RequiredButton>
           </Box>
-          <Box height={95} />
+          <Box height={2} />
         </form>
       )}
     </Formik>

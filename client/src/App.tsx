@@ -1,15 +1,14 @@
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/styles';
-import { theme } from './themes/theme';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import './App.css';
+import { AuthProvider } from './context/useAuthContext';
+import { SnackBarProvider } from './context/useSnackbarContext';
+import { SocketProvider } from './context/useSocketContext';
+import Dashboard from './pages/Dashboard/Dashboard';
 import Login from './pages/Login/Login';
 import Signup from './pages/SignUp/SignUp';
-import Dashboard from './pages/Dashboard/Dashboard';
-import { AuthProvider } from './context/useAuthContext';
-import { SocketProvider } from './context/useSocketContext';
-import { SnackBarProvider } from './context/useSnackbarContext';
-
-import './App.css';
+import { theme } from './themes/theme';
 
 function App(): JSX.Element {
   return (
