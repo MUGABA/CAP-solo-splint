@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = require("./User");
 
 const userProfileSchema = new mongoose.Schema({
   firstName: {
@@ -8,6 +9,9 @@ const userProfileSchema = new mongoose.Schema({
   lastName: {
     type: String,
     required: true,
+  },
+  user: {
+    type: { type: User },
   },
   gender: {
     type: String,
