@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 let server;
 describe("Testing auth routes", () => {
   beforeEach(async () => {
-    server = require("../app.js");
+    server = require("../app.js").server;
   });
 
   afterEach(async () => {
