@@ -72,7 +72,7 @@ const SignUpForm = ({ handleSubmit }: Props): JSX.Element => {
             classes={classes}
             errors={errors}
             touched={touched}
-            placeholder="Your Username"
+            placeholder="Your Email"
             handleChange={handleChange}
           />
           <CustomInput
@@ -84,12 +84,12 @@ const SignUpForm = ({ handleSubmit }: Props): JSX.Element => {
             classes={classes}
             errors={errors}
             touched={touched}
-            placeholder="Your Username"
+            placeholder="Your Password"
             handleChange={handleChange}
           />
           <Box textAlign="center" marginTop={5}>
             <RequiredButton type="submit" size="large" variant="contained" color="primary" className={classes.submit}>
-              {isSubmitting ? <CircularProgress style={{ color: 'white' }} /> : 'Create'}
+              {isSubmitting ? <CircularProgress style={{ color: 'white' }} /> : 'SIGN UP'}
             </RequiredButton>
           </Box>
         </form>
