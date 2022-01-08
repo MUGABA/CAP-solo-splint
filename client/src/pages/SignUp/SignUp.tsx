@@ -14,11 +14,11 @@ export default function Register(): JSX.Element {
   const { updateLoginContext } = useAuth();
   const { updateSnackBarMessage } = useSnackBar();
 
-  const handleSubmit = (
+  const handleSubmit = async (
     { username, email, password }: { email: string; password: string; username: string },
     { setSubmitting }: FormikHelpers<{ email: string; password: string; username: string }>,
   ) => {
-    register(username, email, password).then((data) => {
+    await register(username, email, password).then((data) => {
       if (data.error) {
         console.error({ error: data.error.message });
         setSubmitting(false);

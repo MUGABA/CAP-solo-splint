@@ -3,7 +3,7 @@ const request = require("supertest");
 let server;
 describe("Testing /auth/logout", () => {
   beforeEach(async () => {
-    server = require("../app.js");
+    server = require("../app.js").server;
   });
 
   afterEach(async () => {

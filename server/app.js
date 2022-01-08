@@ -8,6 +8,7 @@ const connectDB = require("./db");
 const { join } = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const cors = require("cors");
 
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
@@ -31,6 +32,7 @@ io.on("connection", (socket) => {
 if (process.env.NODE_ENV === "development") {
   app.use(logger("dev"));
 }
+app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -66,8 +68,9 @@ process.on("unhandledRejection", (err, promise) => {
   server.close(() => process.exit(1));
 });
 
-let appServer = app.listen(3001, () =>
-  console.log(`Listening at port ${3001}`)
-);
+// let appServer = app.listen(3001, () =>
+//   console.log(`Listening at port ${3001}`)
+// );
 
-module.exports = appServer;
+module.exports = { app, server };
+// module.exports = appServer;
