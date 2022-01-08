@@ -29,3 +29,14 @@ exports.validateLogin = [
     next();
   },
 ];
+
+exports.validateUserProfile = [
+  check("firstName", "First Name is required").not().isEmpty(),
+  check("lastName", "Last Name is required").not().isEmpty(),
+  check("gender", "Gender must be either MALE or FEMALE").not().isEmpty(),
+  check("dateOfBirth", "Date Of Birth must be in the passed").isDate(),
+  check("email", "Email must be valid and required").not().isEmpty().isEmail(),
+  check("contact", "Phone Number field"),
+  check("address", "Address is Important"),
+  check("description", "Your Description is important").notEmpty(),
+];
