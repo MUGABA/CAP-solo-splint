@@ -39,4 +39,12 @@ exports.validateUserProfile = [
   check("contact", "Phone Number field"),
   check("address", "Address is Important"),
   check("description", "Your Description is important").notEmpty(),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty())
+      return res.status(400).json({ errors: errors.array() });
+    next();
+  },
 ];
