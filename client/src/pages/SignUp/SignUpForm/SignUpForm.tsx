@@ -1,9 +1,10 @@
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
+import Typography from '@mui/material/Typography';
 import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
+import AuthButton from '../../../components/ReusableComponents/AuthButtons';
 import CustomInput from '../../../components/ReusableComponents/CustomTextField';
-import RequiredButton from '../../../components/ReusableComponents/RequiredButtons';
 import useStyles from './useStyles';
 
 interface Props {
@@ -50,7 +51,9 @@ const SignUpForm = ({ handleSubmit }: Props): JSX.Element => {
     >
       {({ handleSubmit, handleChange, values, touched, errors, isSubmitting }) => (
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
-          <h1 style={{ textAlign: 'center' }}>Sign Up</h1>
+          <Typography variant="h4" sx={{ textAlign: 'center' }}>
+            Sign up
+          </Typography>
           <CustomInput
             id="username"
             label="Username"
@@ -87,10 +90,10 @@ const SignUpForm = ({ handleSubmit }: Props): JSX.Element => {
             placeholder="Your Password"
             handleChange={handleChange}
           />
-          <Box textAlign="center" marginTop={5}>
-            <RequiredButton type="submit" size="large" variant="contained" color="primary" className={classes.submit}>
+          <Box textAlign="center" marginTop={1}>
+            <AuthButton type="submit" size="large" variant="contained" color="primary" className={classes.submit}>
               {isSubmitting ? <CircularProgress style={{ color: 'white' }} /> : 'SIGN UP'}
-            </RequiredButton>
+            </AuthButton>
           </Box>
         </form>
       )}

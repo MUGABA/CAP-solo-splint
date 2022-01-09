@@ -25,6 +25,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: '#3a8dff',
     boxShadow: 'none',
   },
+  linkStyle: {
+    color: '#f14140',
+    paddingLeft: '10px',
+    textDecoration: 'none',
+  },
+  boxStyle: {
+    textAlign: 'center',
+  },
 }));
 
 export default useStyles;

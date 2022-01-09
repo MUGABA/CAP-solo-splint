@@ -9,7 +9,7 @@ interface Props {
   value: string;
   name: string;
   label: string;
-  handleChange: any;
+  handleChange: (e: any) => void;
   classes: any;
   placeholder: string;
   type: string;

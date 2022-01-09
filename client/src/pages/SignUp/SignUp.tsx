@@ -1,8 +1,6 @@
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import { FormikHelpers } from 'formik';
-import { Link } from 'react-router-dom';
+import { default as AuthFooter } from '../../components/AuthHeader/AuthFooter';
+import AuthWrapper from '../../components/ReusableComponents/AuthWrapper';
 import { useAuth } from '../../context/useAuthContext';
 import { useSnackBar } from '../../context/useSnackbarContext';
 import register from '../../helpers/APICalls/register';
@@ -36,28 +34,9 @@ export default function Register(): JSX.Element {
   };
 
   return (
-    <Grid container component="main" className={classes.root}>
-      <Grid item xs={12} elevation={6} component={Paper} square>
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          alignItems="flex-start"
-          flexDirection="column"
-          className={classes.authWrapper}
-        >
-          {/* <AuthHeader linkTo="/login" asideText="Already have an account?" btnText="Login" /> */}
-          <Box width="100%" maxWidth={450} p={3} alignSelf="center" elevation={6} component={Paper} square>
-            <SignUpForm handleSubmit={handleSubmit} />
-            <Box p={2} alignSelf="center" style={{ textAlign: 'center' }}>
-              <span>I already have an account </span>
-              <Link to="/login" style={{ display: 'inline', color: '#f14140' }}>
-                Login
-              </Link>
-            </Box>
-          </Box>
-          <Box p={1} alignSelf="center" />
-        </Box>
-      </Grid>
-    </Grid>
+    <AuthWrapper>
+      <SignUpForm handleSubmit={handleSubmit} />
+      <AuthFooter linkTo="login" asideText="I already have an account" btnText="login" />
+    </AuthWrapper>
   );
 }
