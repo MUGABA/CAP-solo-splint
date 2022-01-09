@@ -26,9 +26,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: 160,
     height: 56,
     borderRadius: theme.shape.borderRadius,
-    marginTop: 49,
+    marginTop: 20,
     fontSize: 16,
-    backgroundColor: '#3a8dff',
+    backgroundColor: '#f14140',
     fontWeight: 'bold',
   },
 }));
