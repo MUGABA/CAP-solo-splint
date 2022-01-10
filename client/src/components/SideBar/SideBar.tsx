@@ -1,8 +1,8 @@
+import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
-import Paper from '@mui/material/Paper';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import useStyles from './useStyles';
 
 const links = [
   <Link to="/dashboard" key={0}>
@@ -33,17 +33,17 @@ interface Props {
 }
 
 function SideBar() {
-  const [isActive, setActive] = useState(false);
+  const classes = useStyles();
+  const location = useLocation();
+
   return (
-    <Paper>
-      <MenuList>
-        {links.map((link, index) => (
-          <MenuItem key={index} selected={isActive}>
-            {link}
-          </MenuItem>
-        ))}
-      </MenuList>
-    </Paper>
+    <MenuList>
+      {links.map((link, index) => (
+        <MenuItem key={index} className={classes.text}>
+          <Box component="span">{link}</Box>
+        </MenuItem>
+      ))}
+    </MenuList>
   );
 }
 
