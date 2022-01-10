@@ -1,18 +1,20 @@
+import { Menu as MenuIcon } from '@mui/icons-material';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Logout from '@mui/icons-material/Logout';
+import Person from '@mui/icons-material/Person';
+import Settings from '@mui/icons-material/Settings';
+import { IconButton } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import Divider from '@mui/material/Divider';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/useAuthContext';
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Menu,
-  MenuItem,
-  ListItemIcon,
-  ListItemText,
-  Divider,
-} from '@mui/material';
-import { Menu as MenuIcon, AccountCircle } from '@mui/icons-material';
-import { Person as ProfileIcon, Logout as LogoutIcon, Settings as SettingsIcon } from '@mui/icons-material';
 
 const Navbar: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -71,20 +73,22 @@ const Navbar: React.FC = () => {
             >
               <MenuItem onClick={handleClose}>
                 <ListItemIcon>
-                  <SettingsIcon fontSize="small" />
+                  <Settings fontSize="small" />
                 </ListItemIcon>
                 <ListItemText>Settings</ListItemText>
               </MenuItem>
               <MenuItem onClick={handleClose}>
                 <ListItemIcon>
-                  <ProfileIcon fontSize="small" />
+                  <Person fontSize="small" />
                 </ListItemIcon>
-                <ListItemText>Profile</ListItemText>
+                <ListItemText>
+                  <Link to="/profile">Profile</Link>
+                </ListItemText>
               </MenuItem>
               <Divider />
               <MenuItem onClick={handleLogout}>
                 <ListItemIcon>
-                  <LogoutIcon fontSize="small" />
+                  <Logout fontSize="small" />
                 </ListItemIcon>
                 <ListItemText>Logout</ListItemText>
               </MenuItem>

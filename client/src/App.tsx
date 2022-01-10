@@ -1,38 +1,23 @@
-import { CssBaseline } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/styles';
-import { theme } from './themes/theme';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
-import Login from './pages/Login/Login';
-import Signup from './pages/SignUp/SignUp';
-import Dashboard from './pages/Dashboard/Dashboard';
-import { AuthProvider } from './context/useAuthContext';
-import { SocketProvider } from './context/useSocketContext';
-import { SnackBarProvider } from './context/useSnackbarContext';
-
 import './App.css';
+import { AuthProvider } from './context/useAuthContext';
+import { SnackBarProvider } from './context/useSnackbarContext';
+import { SocketProvider } from './context/useSocketContext';
+import AuthLayout from './pages/AuthLayout/AuthLayout';
+import { theme } from './themes/theme';
 
 function App(): JSX.Element {
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <SnackBarProvider>
-          <AuthProvider>
-            <SocketProvider>
-              <CssBaseline />
-              <Switch>
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/signup" component={Signup} />
-                <Route exact path="/dashboard">
-                  <Dashboard />
-                </Route>
-                <Route path="*">
-                  <Redirect to="/login" />
-                </Route>
-              </Switch>
-            </SocketProvider>
-          </AuthProvider>
-        </SnackBarProvider>
-      </BrowserRouter>
+      <SnackBarProvider>
+        <AuthProvider>
+          <SocketProvider>
+            <CssBaseline />
+            <AuthLayout />
+          </SocketProvider>
+        </AuthProvider>
+      </SnackBarProvider>
     </ThemeProvider>
   );
 }
