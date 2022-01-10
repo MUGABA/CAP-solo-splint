@@ -1,10 +1,9 @@
+import { CircularProgress, Grid, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { RandomFactCard } from '../../components/FactCard/RandomFactCard';
 import { useAuth } from '../../context/useAuthContext';
 import { useSocket } from '../../context/useSocketContext';
-import { useHistory } from 'react-router-dom';
-import { CircularProgress, Typography, Grid } from '@mui/material';
-import { Navbar } from '../../components/Navbar/Navbar';
-import { RandomFactCard } from '../../components/FactCard/RandomFactCard';
 import { facts } from '../../mocks/mockFacts';
 
 export default function Dashboard(): JSX.Element {
@@ -25,13 +24,13 @@ export default function Dashboard(): JSX.Element {
 
   return (
     <>
-      <Navbar />
       <Grid sx={{ padding: 5 }} container rowSpacing={5} columnSpacing={2}>
         <Grid item xs={12}>
           <Typography variant="h4" component="h1">
             Welcome to random facts!
           </Typography>
         </Grid>
+        {/* <AuthLayout /> */}
         {facts.map(({ id, fact, coverUrl: cover }) => (
           <Grid item key={id} xs={4} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <RandomFactCard fact={fact} cover={cover} />
