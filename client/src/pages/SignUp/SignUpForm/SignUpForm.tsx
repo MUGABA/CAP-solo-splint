@@ -1,10 +1,9 @@
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
+import CustomInput from '../../../components/ReusableComponents/CustomTextField';
+import RequiredButton from '../../../components/ReusableComponents/RequiredButtons';
 import useStyles from './useStyles';
 
 interface Props {
@@ -51,66 +50,47 @@ const SignUpForm = ({ handleSubmit }: Props): JSX.Element => {
     >
       {({ handleSubmit, handleChange, values, touched, errors, isSubmitting }) => (
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
-          <TextField
+          <h1 style={{ textAlign: 'center' }}>Sign Up</h1>
+          <CustomInput
             id="username"
-            label={<Typography className={classes.label}>Username</Typography>}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            InputProps={{
-              classes: { input: classes.inputs },
-            }}
+            label="Username"
             name="username"
-            autoComplete="username"
-            autoFocus
-            helperText={touched.username ? errors.username : ''}
-            error={touched.username && Boolean(errors.username)}
+            type="text"
             value={values.username}
-            onChange={handleChange}
+            classes={classes}
+            errors={errors}
+            touched={touched}
+            placeholder="Your Username"
+            handleChange={handleChange}
           />
-          <TextField
+          <CustomInput
             id="email"
-            label={<Typography className={classes.label}>E-mail address</Typography>}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            InputProps={{
-              classes: { input: classes.inputs },
-            }}
+            label="Email"
             name="email"
-            autoComplete="email"
-            helperText={touched.email ? errors.email : ''}
-            error={touched.email && Boolean(errors.email)}
+            type="text"
             value={values.email}
-            onChange={handleChange}
+            classes={classes}
+            errors={errors}
+            touched={touched}
+            placeholder="Your Email"
+            handleChange={handleChange}
           />
-          <TextField
+          <CustomInput
             id="password"
-            label={<Typography className={classes.label}>Password</Typography>}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            InputProps={{
-              classes: { input: classes.inputs },
-            }}
+            label="Password"
+            name="password"
             type="password"
-            autoComplete="current-password"
-            helperText={touched.password ? errors.password : ''}
-            error={touched.password && Boolean(errors.password)}
             value={values.password}
-            onChange={handleChange}
+            classes={classes}
+            errors={errors}
+            touched={touched}
+            placeholder="Your Password"
+            handleChange={handleChange}
           />
-
           <Box textAlign="center" marginTop={5}>
-            <Button type="submit" size="large" variant="contained" color="primary" className={classes.submit}>
-              {isSubmitting ? <CircularProgress style={{ color: 'white' }} /> : 'Create'}
-            </Button>
+            <RequiredButton type="submit" size="large" variant="contained" color="primary" className={classes.submit}>
+              {isSubmitting ? <CircularProgress style={{ color: 'white' }} /> : 'SIGN UP'}
+            </RequiredButton>
           </Box>
         </form>
       )}

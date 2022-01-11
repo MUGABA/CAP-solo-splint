@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
-import Dashboard from './Dashboard';
 import MockAuthProvider from '../../mocks/mockUseAuthProvider';
+import Dashboard from './Dashboard';
 
 describe('Dashboard tests', () => {
   test('smoke test', () => {
