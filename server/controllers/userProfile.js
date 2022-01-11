@@ -6,16 +6,16 @@ const _ = require("lodash");
 
 // handling this on assumption user is logged in
 exports.createProfile = asyncHandler(async (req, res, next) => {
-  const profileDetails = _.pick(req.body, [
-    "firstName",
-    "lastName",
-    "gender",
-    "dateOfBirth",
-    "email",
-    "contact",
-    "address",
-    "description",
-  ]);
+  const {
+    firstName,
+    lastName,
+    gender,
+    dateOfBirth,
+    email,
+    contact,
+    address,
+    description,
+  } = req.body;
 
   const currentUserId = mongoose.Types.ObjectId(req.user.id);
 
@@ -25,42 +25,49 @@ exports.createProfile = asyncHandler(async (req, res, next) => {
 
   if (findByEmail) {
     res.status(400);
-    throw new Error("Email already in taken");
+    throw new Error("Email already taken");
   }
 
-  const userStillExists = await User.findById(currentUserId).exec();
+  const userStillExists = await User.findById(currentUserId);
   if (!userStillExists) {
     res.status(404);
-    throw new Error("Your account has been deactivated, Please contact admin");
+    throw new Error("Account does not exists");
   }
 
   const userProfile = await UserProfile.create({
-    ...profileDetails,
+    firstName,
+    lastName,
+    gender,
+    dateOfBirth,
+    email,
+    contact,
+    address,
+    description,
     userId: currentUserId,
   });
 
   if (userProfile) {
     res.status(201).json({
       status: 201,
-      success: _.omit(userProfile.toObject(), ["_id", "_v"]),
+      success: _.omit(userProfile.toObject(), ["__v"]),
     });
   } else {
     res.status(400);
-    throw new Error("Check your details");
+    throw new Error("Invalid user data");
   }
 });
 
 exports.updateProfile = asyncHandler(async (req, res, next) => {
-  const profileDetails = _.pick(req.body, [
-    "firstName",
-    "lastName",
-    "gender",
-    "dateOfBirth",
-    "email",
-    "contact",
-    "address",
-    "description",
-  ]);
+  const {
+    firstName,
+    lastName,
+    gender,
+    dateOfBirth,
+    email,
+    contact,
+    address,
+    description,
+  } = req.body;
 
   let userId;
   try {
@@ -69,29 +76,34 @@ exports.updateProfile = asyncHandler(async (req, res, next) => {
     throw new Error("Invalid id");
   }
 
-  const findByEmail = await UserProfile.findOne({
-    email: profileDetails.email,
-  });
+  const findByEmail = await UserProfile.findOne({ email });
   if (findByEmail && findByEmail._id !== userId) {
     res.status(400);
     throw new Error("Email already in use");
   }
 
-  const userProfile = await UserProfile.findById(userId).exec();
+  const userProfile = await UserProfile.findById(userId);
 
   if (userProfile) {
     const updatedProfile = await UserProfile.findByIdAndUpdate(
       userId,
       {
-        ...profileDetails,
+        firstName,
+        lastName,
+        gender,
+        dateOfBirth,
+        email,
+        contact,
+        address,
+        description,
       },
       { new: true }
-    ).exec();
+    ).select(["-__v"]);
 
     res.status(200).json({
       status: 200,
       message: "Profile updated successfully",
-      data: _.omit(updatedProfile.toObject(), ["_id", "__v"]),
+      data: updatedProfile,
     });
   } else {
     res.status(404);
@@ -107,13 +119,13 @@ exports.getProfile = asyncHandler(async (req, res, next) => {
     throw new Error("Invalid id");
   }
 
-  const userProfile = await UserProfile.findById(userId);
+  const userProfile = await UserProfile.findById(userId).select(["-__v"]);
 
   if (userProfile) {
     res.status(200).json({
       status: 200,
       message: "Profile retrieved successfully",
-      data: _.omit(userProfile.toObject(), ["_id", "__v"]),
+      data: userProfile,
     });
   } else {
     res.status(404);
