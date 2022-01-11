@@ -38,7 +38,7 @@ const userProfileSchema = new Schema({
   description: {
     type: String,
   },
-  added_date: {
+  addedDate: {
     type: Date,
     default: Date.now,
   },
