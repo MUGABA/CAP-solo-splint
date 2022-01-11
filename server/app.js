@@ -66,4 +66,8 @@ process.on("unhandledRejection", (err, promise) => {
   server.close(() => process.exit(1));
 });
 
-module.exports = { app, server };
+let appServer = app.listen(3001, () =>
+  console.log(`Listening at port ${3001}`)
+);
+
+module.exports = appServer;

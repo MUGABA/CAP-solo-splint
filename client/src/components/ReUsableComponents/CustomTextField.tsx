@@ -38,10 +38,11 @@ const CustomInput = ({
           id={id}
           fullWidth
           placeholder={placeholder}
-          // margin="normal"
+          name={name}
           autoFocus
           type={type}
           value={value}
+          classes={classes}
           autoComplete="current-password"
           {...otherProps}
           onChange={handleChange}
